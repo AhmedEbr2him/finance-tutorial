@@ -1,0 +1,1 @@
+ALTER TABLE "accounts" RENAME COLUMN "text_id" TO "user_Id";

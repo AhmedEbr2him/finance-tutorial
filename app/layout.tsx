@@ -3,6 +3,8 @@ import localFont from 'next/font/local';
 import './globals.css';
 import { ClerkProvider } from '@clerk/nextjs';
 import { QueryProvider } from '@/providers/query-provider';
+import { SheetProvider } from '@/providers/sheet-provider';
+import { Toaster } from 'react-hot-toast';
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -29,7 +31,14 @@ export default function RootLayout({
 		<ClerkProvider>
 			<html lang='en'>
 				<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-					<QueryProvider>{children}</QueryProvider>
+					<QueryProvider>
+						<SheetProvider />
+						<Toaster
+							position='bottom-right'
+							reverseOrder={true}
+						/>
+						{children}
+					</QueryProvider>
 				</body>
 			</html>
 		</ClerkProvider>

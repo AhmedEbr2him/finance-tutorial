@@ -7,6 +7,7 @@ import {
 	ColumnFiltersState,
 	Row,
 	SortingState,
+	Table as QueryTable,
 	flexRender,
 	getCoreRowModel,
 	getFilteredRowModel,
@@ -24,6 +25,7 @@ import {
 	TableRow,
 } from '@/components/ui/table';
 
+import { useConfirm } from '@/hooks/use-confirm';
 import { Button } from './ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -42,6 +44,11 @@ export function DataTable<TData, TValue>({
 	onDelete,
 	disabled,
 }: DataTableProps<TData, TValue>) {
+	const [ConfirmDialog, confirm] = useConfirm(
+		'Are you sure to delete this accounts?',
+		'You are about to perform a bulk delete.'
+	);
+
 	const [sorting, setSorting] = React.useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
 	const [rowSelection, setRowSelection] = React.useState({});
@@ -63,8 +70,17 @@ export function DataTable<TData, TValue>({
 		},
 	});
 
+	const handleDeleteAccounts = async (table: QueryTable<TData>) => {
+		const ok = await confirm();
+		if (!ok) return null;
+
+		onDelete(table.getFilteredSelectedRowModel().rows);
+		table.resetRowSelection();
+	};
+
 	return (
 		<div>
+			<ConfirmDialog />
 			<div className='flex items-center py-4'>
 				<Input
 					placeholder={`Filter ${filterKey}...`}
@@ -77,6 +93,7 @@ export function DataTable<TData, TValue>({
 						size='sm'
 						variant='outline'
 						disabled={disabled}
+						onClick={() => handleDeleteAccounts(table)}
 						className='ml-auto font-normal text-xs hover:bg-red-600 hover:text-white'>
 						<TrashIcon className='size-4 mr-2' />
 						Delete ({table.getFilteredSelectedRowModel().rows.length})

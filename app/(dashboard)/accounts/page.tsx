@@ -1,30 +1,37 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Loader2, PlusIcon } from 'lucide-react';
+
 import { useNewAccount } from '@/features/accounts/hooks/use-new-account';
-import { PlusIcon } from 'lucide-react';
-import { columns, Payment } from './columns';
+import { useGetAccounts } from '@/features/accounts/api/use-get-accounts';
+
+import { columns } from './columns';
+
 import { DataTable } from '@/components/data-table';
+import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useBulkDeletAccount } from '@/features/accounts/api/use-bulk-delete';
 
 const AccountsPage = () => {
 	const newAccount = useNewAccount();
+	const { data: accounts, isLoading: accountsLoading } = useGetAccounts();
+	const { mutate: deleteAccounts, isPending: deleteAccountsPending } = useBulkDeletAccount();
 
-	const data: Payment[] = [
-		{
-			id: '728ed52f',
-			amount: 100,
-			status: 'pending',
-			email: 'm@example.com',
-		},
-		{
-			id: '728ed52f',
-			amount: 100,
-			status: 'pending',
-			email: 'a@example.com',
-		},
-		// ...
-	];
+	const isDisabled = deleteAccountsPending || accountsLoading;
+
+	if (accountsLoading) {
+		return (
+			<Card className='border-none drop-shadow-none'>
+				<CardHeader>
+					<Skeleton className='h-8 w-48' />
+				</CardHeader>
+				<CardContent className='h-[500px] w-full flex items-center justify-center'>
+					<Loader2 className='size-6 text-slate-300 animate-spin' />
+				</CardContent>
+			</Card>
+		);
+	}
 	return (
 		<div className='max-w-screen-2xl mx-auto w-full pb-10 -mt-24'>
 			<Card className='border-none drop-shadow-none'>
@@ -40,10 +47,13 @@ const AccountsPage = () => {
 				<CardContent>
 					<DataTable
 						columns={columns}
-						data={data}
-						filterKey='email'
-						onDelete={() => {}}
-						disabled={false}
+						data={accounts || []}
+						filterKey='name'
+						onDelete={row => {
+							const ids = row.map(r => r.original.id);
+							deleteAccounts({ ids });
+						}}
+						disabled={isDisabled}
 					/>
 				</CardContent>
 			</Card>

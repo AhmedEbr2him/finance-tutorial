@@ -14,7 +14,6 @@ import {
 } from '@/components/ui/sheet';
 import { AccountForm } from '@/features/accounts/components/account-form';
 import { useCreateAccount } from '@/features/accounts/api/use-create-account';
-import toast from 'react-hot-toast';
 
 const formSchema = insertAccountSchema.pick({
 	name: true,

@@ -4,6 +4,8 @@ import { useMountedState } from 'react-use';
 
 import { NewAccountSheet } from '@/features/accounts/components/new-account-sheet';
 import { EditAccountSheet } from '@/features/accounts/components/edit-account-sheet';
+import { NewCategorySheet } from '@/features/categories/components/new-category-sheet';
+import { EditCategorySheet } from '@/features/categories/components/edit-cateogry-sheet';
 
 export const SheetProvider = () => {
 	// Make provider can only called on client not client and server like use effect
@@ -13,8 +15,11 @@ export const SheetProvider = () => {
 
 	return (
 		<>
-			<EditAccountSheet />
 			<NewAccountSheet />
+			<EditAccountSheet />
+			
+			<NewCategorySheet />
+			<EditCategorySheet/>
 		</>
 	);
 };

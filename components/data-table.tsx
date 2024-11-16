@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import { ArrowUpDown, TrashIcon } from 'lucide-react';
+import { TrashIcon } from 'lucide-react';
 
 import {
 	ColumnDef,
@@ -81,20 +81,20 @@ export function DataTable<TData, TValue>({
 	return (
 		<div>
 			<ConfirmDialog />
-			<div className='flex items-center py-4'>
+			<div className='flex flex-col md:flex-row items-center gap-2 py-4'>
 				<Input
 					placeholder={`Filter ${filterKey}...`}
 					value={(table.getColumn(filterKey)?.getFilterValue() as string) ?? ''}
 					onChange={event => table.getColumn(filterKey)?.setFilterValue(event.target.value)}
-					className='max-w-sm'
+					className='max-w-full w-full'
 				/>
 				{table.getFilteredSelectedRowModel().rows.length > 0 && (
 					<Button
-						size='sm'
+						size='default'
 						variant='outline'
 						disabled={disabled}
 						onClick={() => handleDeleteAccounts(table)}
-						className='ml-auto font-normal text-xs hover:bg-red-600 hover:text-white'>
+						className='ml-auto font-normal text-xs hover:bg-red-600 hover:text-white max-w-full w-full md:max-w-xs'>
 						<TrashIcon className='size-4 mr-2' />
 						Delete ({table.getFilteredSelectedRowModel().rows.length})
 					</Button>
@@ -148,7 +148,7 @@ export function DataTable<TData, TValue>({
 			<div className='flex items-center justify-end space-x-2 py-4'>
 				<div className='flex-1 text-sm text-muted-foreground'>
 					{table.getFilteredSelectedRowModel().rows.length} of{' '}
-					{table.getFilteredRowModel().rows.length} row(s) selected.
+					{table.getFilteredRowModel().rows.length} rows selected.
 				</div>
 
 				<Button

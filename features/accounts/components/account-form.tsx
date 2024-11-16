@@ -7,14 +7,7 @@ import { insertAccountSchema } from '@/db/schema';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import {
-	Form,
-	FormControl,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage,
-} from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 
 const formSchema = insertAccountSchema.pick({
 	name: true,
@@ -54,7 +47,7 @@ export const AccountForm = ({
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(handleSubmit)}
-				className='space-y-4 pt-4'>
+				className='space-y-2 pt-4'>
 				<FormField
 					name='name'
 					control={form.control}
@@ -65,6 +58,7 @@ export const AccountForm = ({
 								<Input
 									disabled={disabled}
 									placeholder='e.g. Cash, Bank, Credit Card'
+									required
 									{...field}
 								/>
 							</FormControl>
@@ -82,10 +76,10 @@ export const AccountForm = ({
 					<Button
 						type='button'
 						disabled={disabled}
-						variant='destructive'
+						variant='outline'
 						size='default'
 						onClick={handleDelete}
-						className='w-full'>
+						className='w-full hover:bg-red-600 hover:text-white'>
 						<Trash className='size-4 mr-2' />
 						Delete account
 					</Button>

@@ -68,6 +68,7 @@ export const EditTransactionsSheet = () => {
 	const isPending =
 		isEditingTransactionPending ||
 		isDeletingTransactionPending ||
+		isTransactionLoading ||
 		isTransactionPending ||
 		isCategoryPending ||
 		isAccountPending;

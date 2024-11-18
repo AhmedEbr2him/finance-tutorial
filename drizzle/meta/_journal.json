@@ -57,6 +57,13 @@
       "when": 1731933804065,
       "tag": "0007_fine_thor",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1731943140280,
+      "tag": "0008_outgoing_swordsman",
+      "breakpoints": true
     }
   ]
 }

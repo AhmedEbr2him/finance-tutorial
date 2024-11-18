@@ -11,7 +11,7 @@ export const useDeleteCategory = (id?: string) => {
 	const mutation = useMutation<ResponseType, Error>({
 		// JSON => WHAT WE ARE GOING TO SEND FROM OUR FORM 'TYPE SAFTY CAUSE OF RESPONSE TYPE'
 		mutationFn: async () => {
-			const response = await client.api.categories[':id']['$delete']( {param: { id }} );
+			const response = await client.api.categories[':id']['$delete']({ param: { id } });
 
 			return await response.json();
 		},
@@ -19,12 +19,13 @@ export const useDeleteCategory = (id?: string) => {
 			// REFETCH ALL CATEGORIES EVERY TIME YOU CREATE A NEW CATEGORY
 			queryClient.invalidateQueries({ queryKey: ['category', { id }] });
 			queryClient.invalidateQueries({ queryKey: ['categories'] });
-			// TODO: INVALIDATE SUMMARY AND TRANSACTIONS
+			queryClient.invalidateQueries({ queryKey: ['transactions'] });
+			// TODO: INVALIDATE SUMMARY
 
 			toast.success('Category deleted successfully!', {
 				style: {
 					fontSize: '12px',
-					fontWeight:"bold"
+					fontWeight: "bold"
 				},
 			});
 		},
@@ -33,7 +34,7 @@ export const useDeleteCategory = (id?: string) => {
 			toast.error('Faild to delete category', {
 				style: {
 					fontSize: '12px',
-					fontWeight:"bold"
+					fontWeight: "bold"
 				},
 			});
 		},

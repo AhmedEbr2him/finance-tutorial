@@ -23,12 +23,14 @@ export const useEditCategory = (id?: string) => {
 			// REFETCH ALL ACOUNT EVERY TIME YOU CREATE A NEW CATEGORIES
 			queryClient.invalidateQueries({ queryKey: ['category', { id }] });
 			queryClient.invalidateQueries({ queryKey: ['categories'] });
-			// TODO: INVALIDATE SUMMARY AND TRANSACTIONS
+			queryClient.invalidateQueries({ queryKey: ['transactions'] });
+
+			// TODO: INVALIDATE SUMMARY
 
 			toast.success('Category edited successfully!', {
 				style: {
 					fontSize: '12px',
-					fontWeight:"bold"
+					fontWeight: "bold"
 				},
 			});
 		},
@@ -37,7 +39,7 @@ export const useEditCategory = (id?: string) => {
 			toast.error('Faild to edit category', {
 				style: {
 					fontSize: '12px',
-					fontWeight:"bold"
+					fontWeight: "bold"
 				},
 			});
 		},

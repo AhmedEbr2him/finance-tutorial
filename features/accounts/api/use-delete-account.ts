@@ -11,7 +11,7 @@ export const useDeleteAccount = (id?: string) => {
 	const mutation = useMutation<ResponseType, Error>({
 		// JSON => WHAT WE ARE GOING TO SEND FROM OUR FORM 'TYPE SAFTY CAUSE OF RESPONSE TYPE'
 		mutationFn: async () => {
-			const response = await client.api.accounts[':id']['$delete']( {param: { id }} );
+			const response = await client.api.accounts[':id']['$delete']({ param: { id } });
 
 			return await response.json();
 		},
@@ -19,7 +19,8 @@ export const useDeleteAccount = (id?: string) => {
 			// REFETCH ALL ACOUNT EVERY TIME YOU CREATE A NEW ACCOUNT
 			queryClient.invalidateQueries({ queryKey: ['account', { id }] });
 			queryClient.invalidateQueries({ queryKey: ['accounts'] });
-			// TODO: INVALIDATE SUMMARY AND TRANSACTIONS
+			queryClient.invalidateQueries({ queryKey: ['transactions'] });
+			// TODO: INVALIDATE SUMMARY
 
 			toast.success('Account deleted successfully!', {
 				style: {

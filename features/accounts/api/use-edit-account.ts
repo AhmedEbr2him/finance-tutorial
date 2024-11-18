@@ -23,7 +23,7 @@ export const useEditAccount = (id?: string) => {
 			// REFETCH ALL ACOUNT EVERY TIME YOU CREATE A NEW ACCOUNT
 			queryClient.invalidateQueries({ queryKey: ['account', { id }] });
 			queryClient.invalidateQueries({ queryKey: ['accounts'] });
-			// TODO: INVALIDATE SUMMARY AND TRANSACTIONS
+			queryClient.invalidateQueries({ queryKey: ['transactions'] });
 
 			toast.success('Account edited successfully!', {
 				style: {

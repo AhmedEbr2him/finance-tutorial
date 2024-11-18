@@ -14,7 +14,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const TransactionsPage = () => {
-	const newAccount = useNewTransaction();
+	const newTransaction = useNewTransaction();
 	const { data: transactions, isLoading: transactionsLoading } = useGetTransactions();
 	const { mutate: deleteTransactions, isPending: deleteTransactionsPending } = useBulkDeleteTransactions();
 
@@ -39,7 +39,7 @@ const TransactionsPage = () => {
 					<CardTitle className='text-xl line-clamp-1'>Transactions History</CardTitle>
 					<Button
 						size='sm'
-						onClick={newAccount.onOpen}>
+						onClick={newTransaction.onOpen}>
 						<PlusIcon className='size-4 mr-2' />
 						Add new
 					</Button>
@@ -48,7 +48,7 @@ const TransactionsPage = () => {
 					<DataTable
 						columns={columns}
 						data={transactions || []}
-						filterKey='name'
+						filterKey='payee'
 						onDelete={row => {
 							const ids = row.map(r => r.original.id);
 							deleteTransactions({ ids });

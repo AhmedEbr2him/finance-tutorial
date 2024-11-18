@@ -56,9 +56,9 @@ export const transactions = pgTable("transactions", {
 		onDelete: "cascade", // when delete account delete transactions also
 	}).notNull(),
 	categoryId: text("category_id").references(() => categories.id, {
-		onDelete:"set null",
-	}).notNull()	
-	
+		onDelete: "set null",
+	}).notNull()
+
 });
 
 export const transactionsRelations = relations(transactions, ({ one }) => ({

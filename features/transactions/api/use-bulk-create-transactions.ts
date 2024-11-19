@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 type ResponseType = InferResponseType<typeof client.api.transactions['bulk-create']['$post']>;
 type RequestType = InferRequestType<typeof client.api.transactions['bulk-create']['$post']>['json']; // ENDPOINT EXCEPTED VALUES
 
-export const useBulkDeleteTransactions = () => {
+export const useBulkCreateTransactions = () => {
 	const queryClient = useQueryClient();
 
 	const mutation = useMutation<ResponseType, Error, RequestType>({
@@ -20,7 +20,7 @@ export const useBulkDeleteTransactions = () => {
 			// REFETCH ALL CATEGORIES EVERY TIME YOU CREATE A NEW CATEGORY
 			queryClient.invalidateQueries({ queryKey: ['transactions'] });
 			// TODO: ALSO INVALIDATE SUMMARY
-			toast.success('Transactions created successfully!', {
+			toast.success('New transactions created successfully!', {
 				style: {
 					fontSize: '12px',
 				},

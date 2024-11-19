@@ -88,9 +88,8 @@ export const ImportCard = ({
       }).filter((row) => row.length > 0)
     };
 
-    console.log({ mappedData });
-
     const arrayOfData = mappedData.body.map((row) => {
+
       return row.reduce((acc: any, cell, index) => {
         const header = mappedData.headers[index];
         if (header !== null) {
@@ -101,14 +100,13 @@ export const ImportCard = ({
       }, {});
     });
 
-
     const formattedData = arrayOfData.map((data) => ({
       ...data,
       amount: convertAmountTomiliunits(parseFloat(data.amount)),
       date: format(parse(data.date, dateFormat, new Date()), outputFormat),
     }));
-    console.log({ formattedData });
 
+    onSubmit(formattedData);
   };
 
   return (

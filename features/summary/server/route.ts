@@ -4,7 +4,7 @@ import { zValidator } from '@hono/zod-validator';
 import { accounts, categories, transactions } from '@/db/schema';
 import { clerkMiddleware, getAuth } from '@hono/clerk-auth';
 import { and, desc, eq, gte, lt, lte, sql, sum } from 'drizzle-orm';
-import { differenceInDays, parse, subDays } from 'date-fns';
+import { differenceInDays, isValid, parse, subDays } from 'date-fns';
 
 import { db } from '@/db/drizzle';
 import { calculatePercentageChange, fillMissingDays } from '@/lib/utils';
@@ -63,7 +63,7 @@ const app = new Hono()
             eq(
               transactions.accountId,
               accounts.id
-            )
+            ),
           )
           .where(
             and(
@@ -159,7 +159,7 @@ const app = new Hono()
           income: sql`SUM(CASE WHEN ${transactions.amount} >= 0 THEN
           ${transactions.amount} ELSE 0 END)`.mapWith(Number),
           expenses: sql`SUM(CASE WHEN ${transactions.amount} < 0 THEN
-          ${transactions.amount} ELSE 0 END)`.mapWith(Number),
+          ABS(${transactions.amount}) ELSE 0 END)`.mapWith(Number),
         })
         .from(transactions)
         .innerJoin(
@@ -180,9 +180,7 @@ const app = new Hono()
         .groupBy(transactions.date)
         .orderBy(transactions.date)
 
-
       const days = fillMissingDays(activeDays, startDate, endDate);
-
 
       return c.json({
         data: {

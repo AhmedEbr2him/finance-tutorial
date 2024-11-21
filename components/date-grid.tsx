@@ -10,7 +10,7 @@ import { formateDateRange } from '@/lib/utils';
 import { DataCard, DataCardLoading } from './data-card';
 import { useGetSummary } from '@/features/summary/api/use-get-summary';
 
-export const DateGrid = () => {
+export const DataGrid = () => {
   const { data: summary, isLoading: summaryIsLoading } = useGetSummary();
 
   const params = useSearchParams();

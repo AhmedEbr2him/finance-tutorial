@@ -1,15 +1,11 @@
-'use client';
+import { DateGrid } from '@/components/date-grid';
 
-import { Button } from '@/components/ui/button';
-import { useNewAccount } from '@/features/accounts/hooks/use-new-account';
 
-export default function Home() {
-	const { onOpen } = useNewAccount();
+
+export default function DashboardPage() {
 	return (
-		<Button
-			className=''
-			onClick={onOpen}>
-			Add an account
-		</Button>
+		<div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
+			<DateGrid />
+		</div>
 	);
 }

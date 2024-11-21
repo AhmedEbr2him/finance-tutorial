@@ -72,7 +72,7 @@ const app = new Hono()
               gte(transactions.date, startDate),
               lte(transactions.date, endDate),
             )
-          )
+          );
       };
 
       const [currentPeriod] = await fetchFinancialData(
@@ -82,8 +82,8 @@ const app = new Hono()
       );
       const [lastPeriod] = await fetchFinancialData(
         auth.userId,
-        startDate,
-        endDate,
+        lastPeriodStart,
+        lastPeriodEnd,
       );
 
       // calculate income change

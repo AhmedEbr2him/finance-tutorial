@@ -23,7 +23,7 @@ export const useDeleteTransaction = (id?: string) => {
 			// REFETCH ALL CATEGORIES EVERY TIME YOU CREATE A NEW CATEGORY
 			queryClient.invalidateQueries({ queryKey: ['transaction', { id }] });
 			queryClient.invalidateQueries({ queryKey: ['transactions'] });
-			// TODO: INVALIDATE SUMMARY
+			queryClient.invalidateQueries({ queryKey: ['summary'] });
 
 			toast.success('Transaction deleted successfully!', {
 				style: {

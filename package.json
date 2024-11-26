@@ -41,6 +41,7 @@
 		"hono": "^4.6.10",
 		"lucide-react": "^0.459.0",
 		"next": "15.0.3",
+		"query-string": "^9.1.1",
 		"react": "19.0.0-rc-66855b96-20241106",
 		"react-countup": "^6.5.3",
 		"react-currency-input-field": "^3.9.0",

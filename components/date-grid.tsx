@@ -5,7 +5,7 @@ import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6";
 
 import { useSearchParams } from 'next/navigation';
 
-import { formateDateRange } from '@/lib/utils';
+import { formatDateRange } from '@/lib/utils';
 
 import { DataCard, DataCardLoading } from './data-card';
 import { useGetSummary } from '@/features/summary/api/use-get-summary';
@@ -17,7 +17,7 @@ export const DataGrid = () => {
   const to = params.get("to") || undefined;
   const from = params.get("from") || undefined;
 
-  const dateRangeLabel = formateDateRange({ to, from });
+  const dateRangeLabel = formatDateRange({ to, from });
 
 
   if (summaryIsLoading) {

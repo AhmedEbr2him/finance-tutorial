@@ -19,7 +19,7 @@ export const useBulkCreateTransactions = () => {
 		onSuccess: () => {
 			// REFETCH ALL CATEGORIES EVERY TIME YOU CREATE A NEW CATEGORY
 			queryClient.invalidateQueries({ queryKey: ['transactions'] });
-			// TODO: ALSO INVALIDATE SUMMARY
+			queryClient.invalidateQueries({ queryKey: ['summary'] });
 			toast.success('New transactions created successfully!', {
 				style: {
 					fontSize: '12px',

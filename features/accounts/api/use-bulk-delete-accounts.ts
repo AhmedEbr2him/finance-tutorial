@@ -19,7 +19,8 @@ export const useBulkDeletAccount = () => {
 		onSuccess: () => {
 			// REFETCH ALL ACOUNT EVERY TIME YOU CREATE A NEW ACCOUNT
 			queryClient.invalidateQueries({ queryKey: ['accounts'] });
-			// TODO: ALSO INVALIDATE SUMMARY
+			queryClient.invalidateQueries({ queryKey: ['summary'] });
+
 			toast.success('Accounts deleted successfully!', {
 				style: {
 					fontSize: '12px',

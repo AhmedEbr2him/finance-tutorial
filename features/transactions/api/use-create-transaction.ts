@@ -28,7 +28,7 @@ export const useCreateTransaction = () => {
 
 			// REFETCH ALL CATEGORIES EVERY TIME YOU CREATE A NEW CATEGORIES
 			queryClient.invalidateQueries({ queryKey: ['transactions'] });
-			// TODO: INVALIDATE SUMMARY
+			queryClient.invalidateQueries({ queryKey: ['summary'] });
 		},
 
 		onError: () => {

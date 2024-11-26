@@ -19,7 +19,8 @@ export const useBulkDeleteCategories = () => {
 		onSuccess: () => {
 			// REFETCH ALL CATEGORIES EVERY TIME YOU CREATE A NEW CATEGORY
 			queryClient.invalidateQueries({ queryKey: ['categories'] });
-			// TODO: ALSO INVALIDATE SUMMARY
+			queryClient.invalidateQueries({ queryKey: ['summary'] });
+
 			toast.success('Categories deleted successfully!', {
 				style: {
 					fontSize: '12px',

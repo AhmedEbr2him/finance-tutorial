@@ -11,7 +11,6 @@ export const useGetTransactions = () => {
 	const accountId = params.get("accountId") || "";
 
 	const query = useQuery({
-		// TODO: CHECK IF PARAMS ARE NEEDED IN THE KEY
 		queryKey: ['transactions', { from, to, accountId }],
 
 		queryFn: async () => {

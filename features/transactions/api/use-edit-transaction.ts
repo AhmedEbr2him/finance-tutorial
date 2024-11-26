@@ -23,7 +23,7 @@ export const useEditTransaction = (id?: string) => {
 			// REFETCH ALL ACOUNT EVERY TIME YOU CREATE A NEW CATEGORIES
 			queryClient.invalidateQueries({ queryKey: ['transaction', { id }] });
 			queryClient.invalidateQueries({ queryKey: ['transactions'] });
-			// TODO: INVALIDATE SUMMARY 
+			queryClient.invalidateQueries({ queryKey: ['summary'] });
 
 			toast.success('Trasnaction edited successfully!', {
 				style: {

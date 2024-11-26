@@ -1,6 +1,6 @@
 'use client';
 
-import { InferResponseType, InferRequestType } from 'hono';
+import { InferResponseType } from 'hono';
 
 import { ArrowUpDown } from 'lucide-react';
 

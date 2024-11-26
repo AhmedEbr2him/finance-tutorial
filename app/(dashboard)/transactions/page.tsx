@@ -16,7 +16,7 @@ import { DataTable } from '@/components/data-table';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { UploadButton } from './upload-button';
 import { ImportCard } from './import-card';
 import { useSelectAccount } from '@/features/accounts/hooks/use-select-account';
@@ -52,7 +52,7 @@ const TransactionsPage = () => {
 	const newTransaction = useNewTransaction();
 	const { data: transactions, isLoading: transactionsLoading } = useGetTransactions();
 	const { mutate: deleteTransactions, isPending: deleteTransactionsPending } = useBulkDeleteTransactions();
-	const { mutate: createBulkTransactions, isPending: createBulkTransactionsIsPending } = useBulkCreateTransactions();
+	const { mutate: createBulkTransactions } = useBulkCreateTransactions();
 
 	const isDisabled = transactionsLoading || deleteTransactionsPending;
 

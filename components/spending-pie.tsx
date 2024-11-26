@@ -38,7 +38,6 @@ export const SpendingPie = ({ data = [] }: SpendingPieProps) => {
   const [chartType, setChartType] = useState("pie");
 
   const onTypeChange = (type: string) => {
-    // TODO: ADD PAYWALL
 
     setChartType(type);
   }

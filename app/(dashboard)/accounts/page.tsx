@@ -1,5 +1,4 @@
 'use client';
-
 import { Loader2, PlusIcon } from 'lucide-react';
 
 import { useNewAccount } from '@/features/accounts/hooks/use-new-account';

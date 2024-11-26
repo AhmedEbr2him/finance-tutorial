@@ -5,7 +5,7 @@ import categories from "@/features/categories/server/route";
 import transactions from "@/features/transactions/server/route";
 import summary from "@/features/summary/server/route";
 
-export const runtime = 'edge';
+/* export const runtime = 'edge'; */
 
 const app = new Hono().basePath('/api');
 

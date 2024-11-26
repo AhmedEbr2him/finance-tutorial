@@ -1,5 +1,5 @@
 import CurrencyInput from "react-currency-input-field";
-import { Info, InfoIcon, MinusCircleIcon, PlusIcon } from "lucide-react";
+import { InfoIcon, MinusCircleIcon, PlusIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {

@@ -13,7 +13,7 @@ import {
 } from "next/navigation"
 import { useGetSummary } from '@/features/summary/api/use-get-summary';
 
-import { cn, formatDateRange } from '@/lib/utils';
+import { formatDateRange } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 
@@ -26,7 +26,6 @@ import {
 export const DateFilter = () => {
   const router = useRouter();
   const pathName = usePathname();
-
   const params = useSearchParams();
   const accountId = params.get('accountId');
   const from = params.get("from") || "";
@@ -40,6 +39,7 @@ export const DateFilter = () => {
     to: to ? new Date(to) : defaultTo,
   };
 
+  const { isLoading: isSummaryLoading } = useGetSummary();
   const [date, setDate] = useState<DateRange | undefined>(
     paramState
   );
@@ -70,11 +70,12 @@ export const DateFilter = () => {
     <Popover>
       <PopoverTrigger asChild>
         <Button
-          disabled={false}
+          disabled={isSummaryLoading}
           size="sm"
           variant='outline'
           className='lg:w-auto w-full h-9 rounded-md px-3 font-normal bg-white/10 hover:bg-white/20 hover:text-white border-none focus:ring-offset-0 focus:ring-transparent outline-none text-white focus:bg-white/30 transition'>
-          <span className="">{formatDateRange(paramState)}</span>
+          <CalendarIcon className='size-4 ml-2 opacity-50' />
+          <span>{formatDateRange(paramState)}</span>
           <ChevronDown className='size-4 ml-2 opacity-50' />
         </Button>
       </PopoverTrigger>

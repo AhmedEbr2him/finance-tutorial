@@ -1,6 +1,6 @@
 'use client';
 
-import { InferResponseType, InferRequestType } from 'hono';
+import { InferResponseType } from 'hono';
 import { format } from 'date-fns';
 
 import { ArrowUpDown } from 'lucide-react';
@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Badge } from '@/components/ui/badge';
 
-import { converAmountFromMiliunits, formatCurrency } from '@/lib/utils';
+import { formatCurrency } from '@/lib/utils';
 import { client } from '@/lib/rpc';
 
 import { Actions } from './actions';
